@@ -80,7 +80,8 @@ docker pull ghcr.io/kabita-dev018/codealpha_cicddemo:latest
 
 ## Author
 
-**Kabita**
+**Kabita maharana**
 GitHub: [Kabita-dev018](https://github.com/Kabita-dev018)
+Gmail: kabitamahara567@gmail.com
 
 Built as part of the CodeAlpha internship.
