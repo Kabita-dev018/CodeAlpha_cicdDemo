@@ -21,6 +21,7 @@ Every time code is pushed to the `main` branch, the pipeline automatically:
 | GitHub Actions | CI/CD pipeline |
 | GitHub Container Registry (ghcr.io) | Stores Docker images |
 | Git + GitHub | Version control |
+| Render | Hosts the live web app |
 
 ## Project Structure
 
@@ -65,6 +66,7 @@ The pipeline is defined in `.github/workflows/cicd.yml` and runs on every push t
 | Syntax check | Runs `python -m py_compile app.py` |
 | Login to ghcr.io | Authenticates using the built-in `GITHUB_TOKEN` |
 | Build and push | Builds the Docker image and pushes it with `latest` and commit SHA tags |
+| Deploy | Triggers a Render deploy via deploy hook |
 
 ## Docker Image
 
@@ -77,7 +79,19 @@ Pull the image:
 ```bash
 docker pull ghcr.io/kabita-dev018/codealpha_cicddemo:latest
 ```
+## Live Demo
 
+https://cicd-demo-qcaf.onrender.com
+
+> Hosted on Render free tier. First load may take 30-50 seconds because free instances spin down when idle.
+
+## Deployment
+
+The app is deployed on Render using the Docker image from GitHub Container Registry. After every successful image push, the pipeline calls a Render deploy hook (stored as the GitHub secret `RENDER_DEPLOY_HOOK`), so the live site updates automatically.
+
+## Pipeline Flow
+
+Code push → GitHub Actions → Syntax check → Docker build → Push to ghcr.io → Render deploy → Live website
 ## Author
 
 **Kabita**
